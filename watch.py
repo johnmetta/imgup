@@ -4,7 +4,11 @@ from watchdog.events import LoggingEventHandler, FileSystemEventHandler
 
 class Show(FileSystemEventHandler):
     def on_created(self, event):
-        os.system("python show.py %s" % event.src_path)
+        # Image viewer started as another system process because
+        # matplotlib is used, and cannot be started on a separate
+        # thread in the main process
+        if event.src_path.split('.')[-1] == 'png':
+            os.system("python show.py %s" % event.src_path)
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO,

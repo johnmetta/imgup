@@ -1,0 +1,6 @@
+##Usage
+
+`$ python watch.py`
+
+When PNG files are added, they will be displayed with a popup showing pixel
+intensity.
